@@ -1,2 +1,18 @@
 
 
+Número do Pedido: NaN
+Data e Hora: 15/09/2024, 23:09:45
+Nome: Matheus Mattesco
+E-mail: matheus.mattesco@edu.unifil.br
+Endereço: Rua Paranaguá 803
+Sabor: Sonho de Valsa
+Tamanho: M
+
+Número do Pedido: NaN
+Data e Hora: 15/09/2024, 23:11:12
+Nome: Matheus
+E-mail: matheus.mattesco@edu.unifil.br
+Endereço: o
+Sabor: Sensação
+Tamanho: M
+

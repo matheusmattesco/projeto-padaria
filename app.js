@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
-const COUNTER_FILE = path.join(__dirname, 'counter.txt'); // Caminho absoluto para o arquivo de contador
+const COUNTER_FILE = path.join(__dirname, 'public/counter.txt'); // Caminho absoluto para o arquivo de contador
 const ORDERS_FILE = path.join(__dirname, 'public/pedidos.txt'); // Caminho absoluto para o arquivo de pedidos
 
 app.use(cors()); // Habilita CORS para todas as rotas
