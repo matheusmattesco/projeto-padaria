@@ -73,7 +73,7 @@
             const data = Object.fromEntries(formData.entries());
             
             // Enviar os dados para o servidor
-            fetch('http://127.0.0.1:3000/submit-order', {
+            fetch('/submit-order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
