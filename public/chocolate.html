@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Padaria Super Sul</title>
+</head>
+<body>
+    <div class="overflow-hidden">
+        <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+          </div>
+        <img src="/img/logo.png" class="w-40 mt-6">
+        <div class="mx-auto max-w-5xl px-6 lg:px-8">
+            <div class="mx-auto gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none">
+                <div class="lg:pr-8 lg:pt-4">
+                    <div class="lg:mt-20">
+                        <p class="text-xl text-gray-500">Agora a vez dos</p>
+                        <p class="mt-2 text-6xl font-bold text-gray-800 mb-10">Recheios de Chocolate: </p>
+                    </div>
+                    <div class="grid grid-cols-4 gap-10">
+                        <div>
+                            <button class="group relative rounded-md focus:outline-none openModalButton" data-recheio="Sonho de Valsa" data-img="/img/sonhodevalsa.jpg">
+                                <div class="aspect-w-12 aspect-h-7 sm:aspect-none rounded-md overflow-hidden h-60">
+                                    <img class="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-md w-full h-full object-cover" src="/img/sonhodevalsa.jpg" alt="Sonho de Valsa">
+                                </div>
+                                <div class="absolute bottom-0 start-0 end-0 p-2">
+                                    <div class="font-semibold text-gray-900 rounded-md bg-white p-3">
+                                        Sonho de Valsa
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="group relative rounded-md focus:outline-none openModalButton" data-recheio="Sensação" data-img="/img/sensacao.jpg">
+                                <div class="aspect-w-12 aspect-h-7 sm:aspect-none rounded-md overflow-hidden h-60">
+                                    <img class="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-md w-full h-full object-cover" src="/img/sensacao.jpg" alt="Sensação">
+                                </div>
+                                <div class="absolute bottom-0 start-0 end-0 p-2">
+                                    <div class="font-semibold text-gray-900 rounded-md bg-white p-3">
+                                        Sensação
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="group relative rounded-md focus:outline-none openModalButton" data-recheio="Dois Amores" data-img="/img/doisamores.jpg">
+                                <div class="aspect-w-12 aspect-h-7 sm:aspect-none rounded-md overflow-hidden h-60">
+                                    <img class="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-md w-full h-full object-cover" src="/img/doisamores.jpg" alt="Dois Amores">
+                                </div>
+                                <div class="absolute bottom-0 start-0 end-0 p-2">
+                                    <div class="font-semibold text-gray-900 rounded-md bg-white p-3">
+                                        Dois Amores
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="group relative rounded-md focus:outline-none openModalButton" data-recheio="Prestígio" data-img="/img/prestigio.webp">
+                                <div class="aspect-w-12 aspect-h-7 sm:aspect-none rounded-md overflow-hidden h-60">
+                                    <img class="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-md w-full h-full object-cover" src="/img/prestigio.webp" alt="Prestígio">
+                                </div>
+                                <div class="absolute bottom-0 start-0 end-0 p-2">
+                                    <div class="font-semibold text-gray-900 rounded-md bg-white p-3">
+                                        Prestígio
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
+                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="h-96 w-full">
+                                <img id="modal-img" src="" class="object-cover w-full h-full">
+                            </div>
+                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                <h3 class="text-5xl font-bold text-gray-600" id="modal-title"></h3>
+                                <div class="mt-2">
+                                    <p class="text-2xl text-gray-500" id="modal-description">
+                                        Descrição do bolo selecionado
+                                    </p>
+                                </div>
+                                <div class="mt-4">
+                                    <p class="text-xl font-semibold text-gray-600">Escolha o Tamanho:</p>
+                                    <div class="space-y-2 mt-2 grid grid-col-3">
+                                        <div class="flex items-center">
+                                            <input type="radio" id="option1" name="choice" value="P" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                            <label for="option1" class="ml-3 text-gray-700 font-semibold">P</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="option2" name="choice" value="M" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                            <label for="option2" class="ml-3 text-gray-700 font-semibold">M</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="option3" name="choice" value="G" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                            <label for="option3" class="ml-3 text-gray-700 font-semibold">G</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button id="generate-pdf" class="w-full inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Gerar Pedido</button>
+                        <button type="button" id="closeModalButton" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <a href="javascript:history.back()" class="fixed bottom-5 left-5 bg-[rgb(65,60,171)] text-white px-6 py-3 rounded-md shadow-lg hover:bg-blue-700 transition">
+        <p class="font-semibold">Voltar</p>
+    </a>
+
+    <script>
+        const openModalButtons = document.querySelectorAll('.openModalButton');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const generatePdfButton = document.getElementById('generate-pdf');
+
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const recheio = button.getAttribute('data-recheio');
+                const imgSrc = button.getAttribute('data-img');
+
+                modalImg.src = imgSrc;
+                modalTitle.innerText = recheio;
+                if (recheio === "Sonho de Valsa") {
+                    modalDescription.innerText = `Você escolheu o bolo ${recheio}, que é super cremoso com amendoim. Selecione o tamanho e gere o pedido.`;
+                } else if (recheio === "Sensação") {
+                    modalDescription.innerText = `Você escolheu o bolo ${recheio}, com morango e chocolate! Selecione o tamanho e gere o pedido.`;
+                } else if (recheio === "Dois Amores") {
+                    modalDescription.innerText = `Você escolheu o bolo ${recheio}, uma deliciosa mistura de chocolate branco e preto. Selecione o tamanho e gere o pedido.`;
+                } else if (recheio === "Prestígio") {
+                    modalDescription.innerText = `Você escolheu o bolo ${recheio}, com recheio de coco e muito chocolate! Selecione o tamanho e gere o pedido.`;
+                } else {
+                    modalDescription.innerText = `Você escolheu o bolo ${recheio}. Selecione o tamanho e gere o pedido.`;
+                }
+                
+                modal.classList.remove('hidden');
+            });
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        generatePdfButton.addEventListener('click', () => {
+            const tamanhoSelecionado = document.querySelector('input[name="choice"]:checked').value;
+            const recheio = modalTitle.innerText;
+
+            // Redireciona para a página de pedido com parâmetros na URL
+            window.location.href = `pedido.html?recheio=${encodeURIComponent(recheio)}&tamanho=${encodeURIComponent(tamanhoSelecionado)}`;
+        });
+
+    </script>
+</body>
+</html>

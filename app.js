@@ -1,61 +1,62 @@
-const express = require("express");
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const cors = require('cors');
+
 const app = express();
-const port = process.env.PORT || 3001;
+const PORT = 3000;
+const COUNTER_FILE = path.join(__dirname, 'counter.txt'); // Caminho absoluto para o arquivo de contador
+const ORDERS_FILE = path.join(__dirname, 'pedidos.txt'); // Caminho absoluto para o arquivo de pedidos
 
-app.get("/", (req, res) => res.type('html').send(html));
+app.use(cors()); // Habilita CORS para todas as rotas
+app.use(express.json());
+app.use(express.static('public'));
 
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
-server.keepAliveTimeout = 120 * 1000;
-server.headersTimeout = 120 * 1000;
-
-const html = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Hello from Render!</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-      setTimeout(() => {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          disableForReducedMotion: true
+// Função para obter o próximo número de pedido
+const getNextOrderNumber = () => {
+    return new Promise((resolve, reject) => {
+        fs.readFile(COUNTER_FILE, 'utf8', (err, data) => {
+            if (err && err.code === 'ENOENT') {
+                // Arquivo não existe, iniciar contador com 1
+                fs.writeFile(COUNTER_FILE, '1', (err) => {
+                    if (err) return reject(err);
+                    resolve(1);
+                });
+            } else if (err) {
+                return reject(err);
+            } else {
+                // Arquivo existe, ler o número atual e incrementar
+                const orderNumber = parseInt(data, 10);
+                const nextOrderNumber = orderNumber + 1;
+                fs.writeFile(COUNTER_FILE, nextOrderNumber.toString(), (err) => {
+                    if (err) return reject(err);
+                    resolve(nextOrderNumber);
+                });
+            }
         });
-      }, 500);
-    </script>
-    <style>
-      @import url("https://p.typekit.net/p.css?s=1&k=vnd5zic&ht=tk&f=39475.39476.39477.39478.39479.39480.39481.39482&a=18673890&app=typekit&e=css");
-      @font-face {
-        font-family: "neo-sans";
-        src: url("https://use.typekit.net/af/00ac0a/00000000000000003b9b2033/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"), url("https://use.typekit.net/af/00ac0a/00000000000000003b9b2033/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"), url("https://use.typekit.net/af/00ac0a/00000000000000003b9b2033/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
-        font-style: normal;
-        font-weight: 700;
-      }
-      html {
-        font-family: neo-sans;
-        font-weight: 700;
-        font-size: calc(62rem / 16);
-      }
-      body {
-        background: white;
-      }
-      section {
-        border-radius: 1em;
-        padding: 1em;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-      }
-    </style>
-  </head>
-  <body>
-    <section>
-      Hello from Render!
-    </section>
-  </body>
-</html>
-`
+    });
+};
+
+app.post('/submit-order', async (req, res) => {
+    try {
+        const pedido = req.body;
+        const dataHora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+        const orderNumber = await getNextOrderNumber();
+        const pedidoFormatado = `Número do Pedido: ${orderNumber}\nData e Hora: ${dataHora}\nNome: ${pedido.name}\nE-mail: ${pedido.email}\nEndereço: ${pedido.address}\nSabor: ${pedido.recheio}\nTamanho: ${pedido.tamanho}\n\n`;
+        
+        fs.appendFile(ORDERS_FILE, pedidoFormatado, (err) => {
+            if (err) {
+                console.error('Erro ao gravar o pedido:', err);
+                return res.status(500).send('Erro ao processar o pedido.');
+            }
+            res.send('Pedido recebido.');
+        });
+    } catch (error) {
+        console.error('Erro:', error);
+        res.status(500).send('Erro ao processar o pedido.');
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
